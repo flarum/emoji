@@ -1,4 +1,5 @@
 import getCaretCoordinates from 'textarea-caret';
+import twemoji from 'twemoji/2/twemoji.npm';
 
 import { extend } from 'flarum/extend';
 import ComposerBody from 'flarum/components/ComposerBody';
@@ -10,6 +11,16 @@ import AutocompleteDropdown from './components/AutocompleteDropdown';
 export default function addComposerAutocomplete() {
 
   const emojiKeys = Object.keys(emojiMap);
+
+  function getEmojiIconCode(emoji) {
+    const U200D = String.fromCharCode(0x200D);
+    const UFE0Fg = /\uFE0F/g;
+
+    return twemoji.convert.toCodePoint(emoji.indexOf(U200D) < 0 ?
+      emoji.replace(UFE0Fg, '') :
+      emoji
+    );
+  }
 
   extend(ComposerBody.prototype, 'config', function(original, isInitialized) {
     if (isInitialized) return;
@@ -75,18 +86,18 @@ export default function addComposerAutocomplete() {
         if (emojiStart) {
           typed = value.substring(emojiStart, cursor).toLowerCase();
 
-          const makeSuggestion = function(key) {
-            const code = ':' + key + ':';
-            const imageName = emojiMap[key];
+          const makeSuggestion = function(emoji) {
+            const imageName = getEmojiIconCode(emoji);
+            const name = emojiMap[emoji][0];
             return (
               <button
-                key={key}
-                onclick={() => applySuggestion(code)}
+                key={emoji}
+                onclick={() => applySuggestion(emoji)}
                 onmouseenter={function() {
                   dropdown.setIndex($(this).parent().index());
                 }}>
-                  <img alt={code} class="emoji" draggable="false" src={'//cdn.jsdelivr.net/emojione/assets/png/' + imageName + '.png'}/>
-                  {key}
+                <img alt={emoji} class="emoji" draggable="false" src={'//twemoji.maxcdn.com/2/72x72/' + imageName + '.png'}/>
+                {name}
               </button>
             );
           };
@@ -107,9 +118,16 @@ export default function addComposerAutocomplete() {
             const findMatchingEmojis = matcher => {
               for (let i = 0; i < emojiKeys.length && maxSuggestions > 0; i++) {
                 const curEmoji = emojiKeys[i];
-                if (matcher(curEmoji) && similarEmoji.indexOf(curEmoji) === -1) {
-                  --maxSuggestions;
-                  similarEmoji.push(emojiKeys[i]);
+
+                if (similarEmoji.indexOf(curEmoji) === -1) {
+                  const names = emojiMap[curEmoji];
+                  for (let name of names) {
+                    if (matcher(name)) {
+                      --maxSuggestions;
+                      similarEmoji.push(curEmoji);
+                      break;
+                    }
+                  }
                 }
               }
             };
@@ -121,11 +139,13 @@ export default function addComposerAutocomplete() {
             findMatchingEmojis(emoji => regTyped.test(emoji));
 
             similarEmoji = similarEmoji.sort((a, b) => {
-              return a.length - b.length
+              const nameA = emojiMap[a][0];
+              const nameB = emojiMap[b][0];
+              return nameA.length - nameB.length;
             });
 
-            for (let key of similarEmoji) {
-              suggestions.push(makeSuggestion(key));
+            for (let emoji of similarEmoji) {
+              suggestions.push(makeSuggestion(emoji));
             }
 
             if (suggestions.length) {
