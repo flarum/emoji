@@ -607,7 +607,7 @@ export default {
     "woman",
     "girls"
   ],
-  "👱‍♀": [
+  "👱‍♀️": [
     "blonde_woman"
   ],
   "👱": [
@@ -624,13 +624,13 @@ export default {
   "👲": [
     "man_with_gua_pi_mao"
   ],
-  "👳‍♀": [
+  "👳‍♀️": [
     "woman_with_turban"
   ],
   "👳": [
     "man_with_turban"
   ],
-  "👮‍♀": [
+  "👮‍♀️": [
     "policewoman"
   ],
   "👮": [
@@ -639,7 +639,7 @@ export default {
     "police",
     "law"
   ],
-  "👷‍♀": [
+  "👷‍♀️": [
     "construction_worker_woman"
   ],
   "👷": [
@@ -647,7 +647,7 @@ export default {
     "construction_worker",
     "helmet"
   ],
-  "💂‍♀": [
+  "💂‍♀️": [
     "guardswoman"
   ],
   "💂": [
@@ -662,12 +662,12 @@ export default {
     "detective",
     "sleuth"
   ],
-  "👩‍⚕": [
+  "👩‍⚕️": [
     "woman_health_worker",
     "doctor",
     "nurse"
   ],
-  "👨‍⚕": [
+  "👨‍⚕️": [
     "man_health_worker",
     "doctor",
     "nurse"
@@ -762,10 +762,10 @@ export default {
   "👨‍🚒": [
     "man_firefighter"
   ],
-  "👩‍✈": [
+  "👩‍✈️": [
     "woman_pilot"
   ],
-  "👨‍✈": [
+  "👨‍✈️": [
     "man_pilot"
   ],
   "👩‍🚀": [
@@ -776,11 +776,11 @@ export default {
     "man_astronaut",
     "space"
   ],
-  "👩‍⚖": [
+  "👩‍⚖️": [
     "woman_judge",
     "justice"
   ],
-  "👨‍⚖": [
+  "👨‍⚖️": [
     "man_judge",
     "justice"
   ],
@@ -820,7 +820,7 @@ export default {
   "🤰": [
     "pregnant_woman"
   ],
-  "🙇‍♀": [
+  "🙇‍♀️": [
     "bowing_woman",
     "respect",
     "thanks"
@@ -836,7 +836,7 @@ export default {
     "information_desk_person",
     "sassy_woman"
   ],
-  "💁‍♂": [
+  "💁‍♂️": [
     "tipping_hand_man",
     "sassy_man",
     "information"
@@ -848,7 +848,7 @@ export default {
     "stop",
     "halt"
   ],
-  "🙅‍♂": [
+  "🙅‍♂️": [
     "no_good_man",
     "ng_man",
     "stop",
@@ -857,33 +857,33 @@ export default {
   "🙆": [
     "ok_woman"
   ],
-  "🙆‍♂": [
+  "🙆‍♂️": [
     "ok_man"
   ],
   "🙋": [
     "raising_hand_woman",
     "raising_hand"
   ],
-  "🙋‍♂": [
+  "🙋‍♂️": [
     "raising_hand_man"
   ],
-  "🤦‍♀": [
+  "🤦‍♀️": [
     "woman_facepalming"
   ],
-  "🤦‍♂": [
+  "🤦‍♂️": [
     "man_facepalming"
   ],
-  "🤷‍♀": [
+  "🤷‍♀️": [
     "woman_shrugging"
   ],
-  "🤷‍♂": [
+  "🤷‍♂️": [
     "man_shrugging"
   ],
   "🙎": [
     "pouting_woman",
     "person_with_pouting_face"
   ],
-  "🙎‍♂": [
+  "🙎‍♂️": [
     "pouting_man"
   ],
   "🙍": [
@@ -891,7 +891,7 @@ export default {
     "person_frowning",
     "sad"
   ],
-  "🙍‍♂": [
+  "🙍‍♂️": [
     "frowning_man"
   ],
   "💇": [
@@ -899,7 +899,7 @@ export default {
     "haircut",
     "beauty"
   ],
-  "💇‍♂": [
+  "💇‍♂️": [
     "haircut_man"
   ],
   "💆": [
@@ -907,7 +907,7 @@ export default {
     "massage",
     "spa"
   ],
-  "💆‍♂": [
+  "💆‍♂️": [
     "massage_man",
     "spa"
   ],
@@ -927,18 +927,18 @@ export default {
     "dancers",
     "bunny"
   ],
-  "👯‍♂": [
+  "👯‍♂️": [
     "dancing_men",
     "bunny"
   ],
-  "🚶‍♀": [
+  "🚶‍♀️": [
     "walking_woman"
   ],
   "🚶": [
     "walking_man",
     "walking"
   ],
-  "🏃‍♀": [
+  "🏃‍♀️": [
     "running_woman",
     "exercise",
     "workout",
@@ -2109,16 +2109,16 @@ export default {
   "🤺": [
     "person_fencing"
   ],
-  "🤼‍♀": [
+  "🤼‍♀️": [
     "women_wrestling"
   ],
-  "🤼‍♂": [
+  "🤼‍♂️": [
     "men_wrestling"
   ],
-  "🤸‍♀": [
+  "🤸‍♀️": [
     "woman_cartwheeling"
   ],
-  "🤸‍♂": [
+  "🤸‍♂️": [
     "man_cartwheeling"
   ],
   "⛹️‍♀️": [
@@ -2127,10 +2127,10 @@ export default {
   "⛹": [
     "basketball_man"
   ],
-  "🤾‍♀": [
+  "🤾‍♀️": [
     "woman_playing_handball"
   ],
-  "🤾‍♂": [
+  "🤾‍♂️": [
     "man_playing_handball"
   ],
   "🏌️‍♀️": [
@@ -2139,27 +2139,27 @@ export default {
   "🏌": [
     "golfing_man"
   ],
-  "🏄‍♀": [
+  "🏄‍♀️": [
     "surfing_woman"
   ],
   "🏄": [
     "surfing_man",
     "surfer"
   ],
-  "🏊‍♀": [
+  "🏊‍♀️": [
     "swimming_woman"
   ],
   "🏊": [
     "swimming_man",
     "swimmer"
   ],
-  "🤽‍♀": [
+  "🤽‍♀️": [
     "woman_playing_water_polo"
   ],
-  "🤽‍♂": [
+  "🤽‍♂️": [
     "man_playing_water_polo"
   ],
-  "🚣‍♀": [
+  "🚣‍♀️": [
     "rowing_woman"
   ],
   "🚣": [
@@ -2169,14 +2169,14 @@ export default {
   "🏇": [
     "horse_racing"
   ],
-  "🚴‍♀": [
+  "🚴‍♀️": [
     "biking_woman"
   ],
   "🚴": [
     "biking_man",
     "bicyclist"
   ],
-  "🚵‍♀": [
+  "🚵‍♀️": [
     "mountain_biking_woman"
   ],
   "🚵": [
@@ -2228,10 +2228,10 @@ export default {
   "🎪": [
     "circus_tent"
   ],
-  "🤹‍♀": [
+  "🤹‍♀️": [
     "woman_juggling"
   ],
-  "🤹‍♂": [
+  "🤹‍♂️": [
     "man_juggling"
   ],
   "🎭": [

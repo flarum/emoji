@@ -1,9 +1,9 @@
 import getCaretCoordinates from 'textarea-caret';
-import twemoji from 'twemoji/2/twemoji.npm';
 
 import { extend } from 'flarum/extend';
 import ComposerBody from 'flarum/components/ComposerBody';
 import emojiMap from './helpers/emojiMap';
+import getEmojiIconCode from './helpers/getEmojiIconCode';
 import KeyboardNavigatable from 'flarum/utils/KeyboardNavigatable';
 
 import AutocompleteDropdown from './components/AutocompleteDropdown';
@@ -11,16 +11,6 @@ import AutocompleteDropdown from './components/AutocompleteDropdown';
 export default function addComposerAutocomplete() {
 
   const emojiKeys = Object.keys(emojiMap);
-
-  function getEmojiIconCode(emoji) {
-    const U200D = String.fromCharCode(0x200D);
-    const UFE0Fg = /\uFE0F/g;
-
-    return twemoji.convert.toCodePoint(emoji.indexOf(U200D) < 0 ?
-      emoji.replace(UFE0Fg, '') :
-      emoji
-    );
-  }
 
   extend(ComposerBody.prototype, 'config', function(original, isInitialized) {
     if (isInitialized) return;
@@ -86,9 +76,7 @@ export default function addComposerAutocomplete() {
         if (emojiStart) {
           typed = value.substring(emojiStart, cursor).toLowerCase();
 
-          const makeSuggestion = function(emoji) {
-            const imageName = getEmojiIconCode(emoji);
-            const name = emojiMap[emoji][0];
+          const makeSuggestion = function({emoji, name, code}) {
             return (
               <button
                 key={emoji}
@@ -96,15 +84,14 @@ export default function addComposerAutocomplete() {
                 onmouseenter={function() {
                   dropdown.setIndex($(this).parent().index());
                 }}>
-                <img alt={emoji} class="emoji" draggable="false" src={'//twemoji.maxcdn.com/2/72x72/' + imageName + '.png'}/>
-                {name}
+                  <img alt={emoji} class="emoji" draggable="false" src={'//twemoji.maxcdn.com/2/72x72/' + code + '.png'}/>
+                  {name}
               </button>
             );
           };
 
           const buildSuggestions = () => {
-            const suggestions = [];
-            let similarEmoji = [];
+            const similarEmoji = [];
 
             // Build a regular expression to do a fuzzy match of the given input string
             const fuzzyRegexp = function(str) {
@@ -138,15 +125,13 @@ export default function addComposerAutocomplete() {
             // If there are still suggestions left, try for some fuzzy matches
             findMatchingEmojis(emoji => regTyped.test(emoji));
 
-            similarEmoji = similarEmoji.sort((a, b) => {
-              const nameA = emojiMap[a][0];
-              const nameB = emojiMap[b][0];
-              return nameA.length - nameB.length;
-            });
-
-            for (let emoji of similarEmoji) {
-              suggestions.push(makeSuggestion(emoji));
-            }
+            const suggestions = similarEmoji.map(emoji => ({
+                emoji,
+                name: emojiMap[emoji][0],
+                code: getEmojiIconCode(emoji),
+              })).sort((a, b) => {
+                return a.name.length - b.name.length;
+              }).map(makeSuggestion);
 
             if (suggestions.length) {
               dropdown.props.items = suggestions;
