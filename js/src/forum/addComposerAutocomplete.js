@@ -22,7 +22,7 @@ export default function addComposerAutocomplete() {
     let typed;
 
     const applySuggestion = function(replacement) {
-      const insert = replacement + ' ';
+      const insert = String.fromCodePoint(...replacement.split('-').map(e => `0x${e}`)) + ' ';;
 
       const content = composer.content();
       composer.editor.setValue(content.substring(0, emojiStart - 1) + insert + content.substr($textarea[0].selectionStart));
@@ -81,7 +81,7 @@ export default function addComposerAutocomplete() {
             return (
               <button
                 key={key}
-                onclick={() => applySuggestion(code)}
+                onclick={() => applySuggestion(imageName)}
                 onmouseenter={function() {
                   dropdown.setIndex($(this).parent().index());
                 }}>
