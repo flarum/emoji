@@ -14,12 +14,6 @@ const alternative = {
 const emojis = {};
 
 for (let e of data) {
-  const {
-    name,
-    shortcodes,
-    tags,
-  } = e;
-
   const emoji = alternative[e.emoji] || e.emoji;
   const emojiCode = getEmojiIconCode(emoji);
 
@@ -28,9 +22,7 @@ for (let e of data) {
     continue;
   }
 
-  emojis[emoji] = [
-    ...shortcodes,
-  ];
+  emojis[emoji] = e.shortcodes;
 }
 
 const outputDir = path.dirname(outputPath);
