@@ -29,4 +29,4 @@ return [
             $config->Emoticons->add(':O', '😮');
             $config->Emoticons->add('>:(', '😡');
         })
-    ];
+];
