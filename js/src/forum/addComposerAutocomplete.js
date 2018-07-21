@@ -2,7 +2,7 @@ import getCaretCoordinates from 'textarea-caret';
 
 import { extend } from 'flarum/extend';
 import ComposerBody from 'flarum/components/ComposerBody';
-import emojiMap from './helpers/emojiMap';
+import emojiMap from './generated/emojiMap.json';
 import getEmojiIconCode from './helpers/getEmojiIconCode';
 import KeyboardNavigatable from 'flarum/utils/KeyboardNavigatable';
 
