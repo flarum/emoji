@@ -10,8 +10,10 @@
     "twemoji": "^11.0.0"
   },
   "scripts": {
-    "build": "npm run generate-emoji-map; webpack --mode production",
-    "watch": "npm run generate-emoji-map; webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "prebuild": "npm run generate-emoji-map",
+    "prewatch": "npm run generate-emoji-map",
     "generate-emoji-map": "node ./scripts/generate-emoji-map.js"
   }
 }
