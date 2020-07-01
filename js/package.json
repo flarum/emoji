@@ -3,7 +3,7 @@
   "name": "@flarum/emoji",
   "dependencies": {
     "flarum-webpack-config": "0.1.0-beta.10",
-    "simple-emoji-map": "git+https://github.com/davwheat/simple-emoji-map.git#master",
+    "simple-emoji-map": "^0.4.1",
     "textarea-caret": "^3.1.0",
     "twemoji": "^13.0.0",
     "webpack": "^4.43.0",
