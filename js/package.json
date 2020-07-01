@@ -12,8 +12,5 @@
   "scripts": {
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production"
-  },
-  "devDependencies": {
-    "prettier": "^2.0.0"
   }
 }
