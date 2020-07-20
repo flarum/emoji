@@ -1,5 +1,6 @@
 import getCaretCoordinates from 'textarea-caret';
 import emojiMap from 'simple-emoji-map';
+import twemoji from 'twemoji';
 
 import { extend } from 'flarum/extend';
 import ComposerBody from 'flarum/components/ComposerBody';
@@ -11,6 +12,7 @@ import KeyboardNavigatable from 'flarum/utils/KeyboardNavigatable';
 import AutocompleteDropdown from './components/AutocompleteDropdown';
 
 export default function addComposerAutocomplete() {
+  const ver = /[0-9]+.[0-9]+.[0-9]+/g.exec(twemoji.base);
   const emojiKeys = Object.keys(emojiMap);
 
   extend(ComposerBody.prototype, 'config', function(original, isInitialized) {
@@ -87,7 +89,7 @@ export default function addComposerAutocomplete() {
                 onmouseenter={function() {
                   dropdown.setIndex($(this).parent().index() - 1);
                 }}>
-                  <img alt={emoji} class="emoji" draggable="false" src={'//cdn.jsdelivr.net/gh/twitter/twemoji@13/assets/72x72/' + code + '.png'}/>
+                  <img alt={emoji} class="emoji" draggable="false" src={'https://cdn.jsdelivr.net/gh/twitter/twemoji@' + ver + '/assets/72x72/' + code + '.png'}/>
                   {name}
               </button>
             );
