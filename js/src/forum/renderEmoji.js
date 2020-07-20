@@ -10,7 +10,8 @@ export default function renderEmoji() {
     const contentHtml = original();
 
     if (this.oldContentHtml !== contentHtml) {
-      this.emojifiedContentHtml = twemoji.parse(contentHtml);
+      const buildUrl = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@12.1.2/assets/';
+      this.emojifiedContentHtml = twemoji.parse(contentHtml, { base: buildUrl });
       this.oldContentHtml = contentHtml;
     }
 
@@ -20,6 +21,7 @@ export default function renderEmoji() {
   override(s9e.TextFormatter, 'preview', (original, text, element) => {
     original(text, element);
 
-    twemoji.parse(element);
+    const buildUrl = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@12.1.2/assets/';
+    twemoji.parse(element, { base: buildUrl });
   });
 }
