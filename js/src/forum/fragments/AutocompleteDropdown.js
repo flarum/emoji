@@ -10,7 +10,7 @@ export default class AutocompleteDropdown extends Fragment {
     return (
       <ul className="Dropdown-menu EmojiDropdown">
         <li className="Dropdown-header">{app.translator.trans('flarum-emoji.forum.composer.type_to_search_text')}</li>
-        {this.items.map(item => <li>{item}</li>)}
+        {this.items.map(item => <li key={item.attrs.key}>{item}</li>)}
       </ul>
     );
   }
