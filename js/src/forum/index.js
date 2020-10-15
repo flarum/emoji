@@ -11,6 +11,3 @@ app.initializers.add('flarum-emoji', () => {
   // render emoji as image in Posts content and title.
   renderEmoji();
 });
-
-import * as cdn from './cdn';
-export { cdn };
