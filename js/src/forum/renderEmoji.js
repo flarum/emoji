@@ -5,12 +5,16 @@ import twemoji from 'twemoji';
 import { override } from 'flarum/extend';
 import Post from 'flarum/models/Post';
 
+import cdn from './cdn';
+
+const parseOptions = { base: `${cdn}/assets/` };
+
 export default function renderEmoji() {
   override(Post.prototype, 'contentHtml', function(original) {
     const contentHtml = original();
 
     if (this.oldContentHtml !== contentHtml) {
-      this.emojifiedContentHtml = twemoji.parse(contentHtml);
+      this.emojifiedContentHtml = twemoji.parse(contentHtml, parseOptions);
       this.oldContentHtml = contentHtml;
     }
 
@@ -20,6 +24,6 @@ export default function renderEmoji() {
   override(s9e.TextFormatter, 'preview', (original, text, element) => {
     original(text, element);
 
-    twemoji.parse(element);
+    twemoji.parse(element, parseOptions);
   });
 }
