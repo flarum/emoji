@@ -1,4 +1,3 @@
-import getCaretCoordinates from 'textarea-caret';
 import emojiMap from 'simple-emoji-map';
 
 import { extend } from 'flarum/extend';
@@ -17,7 +16,7 @@ export default function addComposerAutocomplete() {
 
     const $container = $('<div class="ComposerBody-emojiDropdownContainer"></div>');
     const dropdown = new AutocompleteDropdown();
-    const $textarea = this.$('textarea').wrap('<div class="ComposerBody-emojiWrapper"></div>');
+    const $editor = this.$('.TextEditor-editor').wrap('<div class="ComposerBody-emojiWrapper"></div>');
     let emojiStart;
     let typed;
 
@@ -34,22 +33,24 @@ export default function addComposerAutocomplete() {
       .onDown(() => dropdown.navigate(1))
       .onSelect(dropdown.complete.bind(dropdown))
       .onCancel(dropdown.hide.bind(dropdown))
-      .bindTo($textarea);
+      .bindTo($editor);
 
-    $textarea
+    $editor
       .after($container)
-      .on('click keyup input', function(e) {
+      .on('click keyup input', function (e) {
         // Up, down, enter, tab, escape, left, right.
         if ([9, 13, 27, 40, 38, 37, 39].indexOf(e.which) !== -1) return;
 
-        const cursor = this.selectionStart;
+        const selection = app.composer.editor.getSelectionRange();
 
-        if (this.selectionEnd - cursor > 0) return;
+        const cursor = selection[0];
+
+        if (selection[1] - cursor > 0) return;
 
         // Search backwards from the cursor for an ':' symbol. If we find
         // one and followed by a whitespace, we will want to show the
         // autocomplete dropdown!
-        const value = this.value;
+        const value = app.composer.fields.content();
         emojiStart = 0;
         for (let i = cursor - 1; i >= 0; i--) {
           const character = value.substr(i, 1);
@@ -62,6 +63,8 @@ export default function addComposerAutocomplete() {
             break;
           }
         }
+
+        console.log(emojiStart)
 
         dropdown.hide();
         dropdown.active = false;
@@ -129,7 +132,7 @@ export default function addComposerAutocomplete() {
               m.render($container[0], dropdown.render());
 
               dropdown.show();
-              const coordinates = getCaretCoordinates(this, emojiStart);
+              const coordinates = app.composer.editor.getCaretCoordinates(emojiStart);
               const width = dropdown.$().outerWidth();
               const height = dropdown.$().outerHeight();
               const parent = dropdown.$().offsetParent();
