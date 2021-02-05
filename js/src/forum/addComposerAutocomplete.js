@@ -64,8 +64,6 @@ export default function addComposerAutocomplete() {
           }
         }
 
-        console.log(emojiStart)
-
         dropdown.hide();
         dropdown.active = false;
 
