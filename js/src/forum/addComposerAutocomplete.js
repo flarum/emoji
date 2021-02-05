@@ -17,11 +17,12 @@ export default function addComposerAutocomplete() {
     const $container = $('<div class="ComposerBody-emojiDropdownContainer"></div>');
     const dropdown = new AutocompleteDropdown();
     const $editor = this.$('.TextEditor-editor').wrap('<div class="ComposerBody-emojiWrapper"></div>');
-    let emojiStart;
+    let relEmojiStart;
+    let absEmojiStart;
     let typed;
 
     const applySuggestion = (replacement) => {
-      this.attrs.composer.editor.replaceBeforeCursor(emojiStart - 1, replacement + ' ');
+      this.attrs.composer.editor.replaceBeforeCursor(absEmojiStart - 1, replacement + ' ');
 
       dropdown.hide();
     };
@@ -50,16 +51,17 @@ export default function addComposerAutocomplete() {
         // Search backwards from the cursor for an ':' symbol. If we find
         // one and followed by a whitespace, we will want to show the
         // autocomplete dropdown!
-        const value = app.composer.fields.content();
-        emojiStart = 0;
-        for (let i = cursor - 1; i >= 0; i--) {
-          const character = value.substr(i, 1);
+        const lastChunk = app.composer.editor.getLastNChars(15);
+        absEmojiStart = 0;
+        for (let i = lastChunk.length - 1; i >= 0; i--) {
+          const character = lastChunk.substr(i, 1);
           // check what user typed, emoji names only contains alphanumeric,
           // underline, '+' and '-'
           if (!/[a-z0-9]|\+|\-|_|\:/.test(character)) break;
           // make sure ':' followed by a whitespace or newline
-          if (character === ':' && (i == 0 || /\s/.test(value.substr(i - 1, 1)))) {
-            emojiStart = i + 1;
+          if (character === ':' && (i == 0 || /\s/.test(lastChunk.substr(i - 1, 1)))) {
+            relEmojiStart = i + 1;
+            absEmojiStart = cursor - lastChunk.length + i + 1;
             break;
           }
         }
@@ -67,8 +69,8 @@ export default function addComposerAutocomplete() {
         dropdown.hide();
         dropdown.active = false;
 
-        if (emojiStart) {
-          typed = value.substring(emojiStart, cursor).toLowerCase();
+        if (absEmojiStart) {
+          typed = lastChunk.substring(absEmojiStart, cursor).toLowerCase();
 
           const makeSuggestion = function({emoji, name, code}) {
             return (
@@ -130,7 +132,7 @@ export default function addComposerAutocomplete() {
               m.render($container[0], dropdown.render());
 
               dropdown.show();
-              const coordinates = app.composer.editor.getCaretCoordinates(emojiStart);
+              const coordinates = app.composer.editor.getCaretCoordinates(absEmojiStart);
               const width = dropdown.$().outerWidth();
               const height = dropdown.$().outerHeight();
               const parent = dropdown.$().offsetParent();
