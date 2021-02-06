@@ -161,7 +161,7 @@ export default function addComposerAutocomplete() {
 
   extend(TextEditor.prototype, 'toolbarItems', function(items) {
     items.add('emoji', (
-      <TextEditorButton onclick={() => this.attrs.composer.editor.insertAtCursor(':')} icon="far fa-smile">
+      <TextEditorButton onclick={() => this.attrs.composer.editor.insertAtCursor(' :')} icon="far fa-smile">
         {app.translator.trans('flarum-emoji.forum.composer.emoji_tooltip')}
       </TextEditorButton>
     ));
