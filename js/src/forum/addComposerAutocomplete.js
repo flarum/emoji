@@ -58,7 +58,7 @@ export default function addComposerAutocomplete() {
         // check what user typed, emoji names only contains alphanumeric,
         // underline, '+' and '-'
         if (!/[a-z0-9]|\+|\-|_|\:/.test(character)) break;
-        // make sure ':' followed by a whitespace or newline
+        // make sure ':' preceded by a whitespace or newline
         if (character === ':' && (i == 0 || /\s/.test(lastChunk.substr(i - 1, 1)))) {
           relEmojiStart = i + 1;
           absEmojiStart = cursor - lastChunk.length + i + 1;
@@ -70,7 +70,7 @@ export default function addComposerAutocomplete() {
       dropdown.active = false;
 
       if (absEmojiStart) {
-        typed = lastChunk.substring(absEmojiStart, cursor).toLowerCase();
+        typed = lastChunk.substring(relEmojiStart).toLowerCase();
 
         const makeSuggestion = function ({ emoji, name, code }) {
           return (
