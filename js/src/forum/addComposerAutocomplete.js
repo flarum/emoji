@@ -26,8 +26,7 @@ export default function addComposerAutocomplete() {
       .onCancel(dropdown.hide.bind(dropdown))
       .bindTo($editor);
 
-    $editor
-      .after($container)
+    $editor.after($container);
 
   });
 
@@ -139,14 +138,19 @@ export default function addComposerAutocomplete() {
             const parent = dropdown.$().offsetParent();
             let left = coordinates.left;
             let top = coordinates.top + 15;
+
+            // Keep the dropdown inside the editor.
             if (top + height > parent.height()) {
               top = coordinates.top - height - 15;
             }
             if (left + width > parent.width()) {
               left = parent.width() - width;
             }
-            top = Math.max(-$(this).offset().top, top);
-            left = Math.max(-$(this).offset().left, left);
+
+            // Prevent the dropdown from going off screen on mobile
+            top = Math.max(-parent.offset().top, top);
+            left = Math.max(-parent.offset().left, left);
+
             dropdown.show(left, top);
           }
         };
