@@ -12,5 +12,8 @@
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "format": "prettier --write src"
+  },
+  "devDependencies": {
+    "flarum-tsconfig": "^1.0.0"
   }
 }
